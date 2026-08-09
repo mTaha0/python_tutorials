@@ -46,7 +46,7 @@ def order(kind, *arguments, **keywords):
 
 order("ezine peyniri ",
      "kars kaşarı","tulum peyniri",
-      satici="ahmet", yer="artvin")
+      satici="ahmet", yer="artvin") 
 
 
 def f(pos1, pos2, /, pos_or_kwd, *, kwd1, kwd2):
@@ -62,3 +62,4 @@ for x in liste:
     print(x)
 
 a = 25 
+
