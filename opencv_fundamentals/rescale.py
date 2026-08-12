@@ -1,7 +1,8 @@
 import cv2 as cv
 
-img = cv.imread(r"C:\Users\tahat\Desktop\python_tutorials\opencv_fundamentals\photos\cat.jpg")
+img = cv.imread('opencv_fundamentals/photos/cat.jpg')
 
+#rescale method
 def rescaleFrame(frame, scale=0.75):
     #images,videos and live videos
     width = int(img.shape[1]*scale)
@@ -9,6 +10,7 @@ def rescaleFrame(frame, scale=0.75):
     dimensions = (width, height)
     return cv.resize(frame, dimensions, interpolation=cv.INTER_AREA)
 
+#resize method 
 def changeRes(width, height):
     #live videos only
     capture.set(3, width)
