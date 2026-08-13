@@ -32,3 +32,5 @@ if __name__ == "__main__":
     
     print(f"Benzersiz Eleman Sayısı (k): {k}")
     print(f"Düzenlenmiş Liste: {ornek_nums[:k]}")
+
+    
