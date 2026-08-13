@@ -20,8 +20,10 @@ print("+ ",array.ndim)
 array = np.array([["A","B","C"], #2x3 matris
                   ["A","B","C"]])
 print(array.ndim)
-array = np.array([["A","B","C"], #3x3 matris
+array = np.array([["A","B","C"], #
+                  ["A","B","C"],
                   ["A","B","C"]])
+
 print(array.shape)
 print(array.ndim)
 

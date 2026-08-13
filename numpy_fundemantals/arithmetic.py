@@ -19,7 +19,6 @@ print(np.ceil(array))  # en yakın üst değer
 
 print("-"*40)
 # EXERCISE 
-
 print(np.pi*array**2) #pi.r^2
 
 # ELEMENT-WISE OPERATIONS
