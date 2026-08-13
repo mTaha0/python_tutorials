@@ -5,15 +5,17 @@ img = cv.imread('opencv_fundamentals/photos/cat.jpg')
 
 gray = cv.cvtColor(img, cv.COLOR_BGR2GRAY)
 cv.imshow("gray", gray)
+
 hsv = cv.cvtColor(img, cv.COLOR_BGR2HSV)
 cv.imshow("hsv", hsv)
-lab = hsv = cv.cvtColor(img, cv.COLOR_BGR2LAB)
+
+lab =cv.cvtColor(img, cv.COLOR_BGR2LAB)
 cv.imshow("lab", lab)
 
 rgb = cv.cvtColor(img, cv.COLOR_BGR2RGB)
 plt.imshow(rgb)
+
 plt.show()
 
-
-# cv.waitKey(0)
+cv.waitKey(0)
 
