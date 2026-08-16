@@ -3,6 +3,8 @@ import numpy as np
 
 blank = np.zeros((500,500,3), dtype="uint8" )
 
+# cv.rectangle(resim, sol_ust_kose, sag_alt_kose, renk, kalinlik) 
+# Resme dikdörtgen çizer. Kalınlık parametresine -1 verilirse karenin içini tamamen doldurur.
 rectangle = cv.rectangle(blank.copy(), (100, 100), (400, 400), 255, -1)
 circle = cv.circle(blank.copy(), (250, 250), 175, 255, -1)
 

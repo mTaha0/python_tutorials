@@ -9,6 +9,9 @@ gray = cv.cvtColor(img, cv.COLOR_BGR2GRAY)
 blank = np.zeros(img.shape[:2], dtype="uint8")
 mask = cv.circle(blank, (img.shape[1]//2, img.shape[0]//2), 50, 255, -1)
 bitwise_and = cv.bitwise_and(gray, gray, mask=mask)
+
+# cv.calcHist([resim], [kanal_indeksi], maske, [kutu_sayisi], [deger_araligi]) 
+# Görüntünün ışık/renk çetelesini çıkarır. Renk kanalları: B(0), G(1), R(2). Maske yoksa 'None' yazılır.
 gray_hist = cv.calcHist([gray], [0], bitwise_and, [256], [0,256])
 
 colors = ("b", "g", "r")
