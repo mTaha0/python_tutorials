@@ -1,0 +1,59 @@
+# ==========================================
+# YAPAY ZEKA VE EĞİTİM (TRAINING) MANTIĞI - LBPH
+# ==========================================
+
+# LBPH (Local Binary Patterns Histograms) algoritması yüzleri renklerle değil, 
+# doku ve gölge değişimleriyle "matematiksel bir parmak izi" çıkararak tanır. 
+# İşlem 4 temel aşamada gerçekleşir:
+
+# 1. BİNARY (İKİLİ) DÖNÜŞÜM (Doku Çıkarma): 
+# Resimdeki her pikselin parlaklığı, etrafındaki 8 komşusuyla kıyaslanır. 
+# Komşu büyükse 1, küçükse 0 verilir. 8 haneli bir kod (Örn: 10011011) oluşur.
+# Bu kod normal bir sayıya (0-255) çevrilerek o pikselin yeni değeri olur. 
+# Böylece yüzdeki kırışıklık, kaş, elmacık kemiği gölgesi gibi mikro detaylar keskinleşir.
+
+# 2. IZGARALARA (GRID) BÖLME:
+# Tüm resim bu işleme tabi tutulduktan sonra, algoritma resmi genellikle 
+# 8x8'lik (toplam 64) küçük kare parçalara böler.
+
+# 3. HİSTOGRAM (DİJİTAL PARMAK İZİ) ÇIKARMA:
+# Her bir karenin içindeki piksel değerleri sayılır (Hangi sayıdan kaç tane var?). 
+# Bu 64 ayrı parçanın istatistikleri yan yana dizilir ve o yüzün devasa boyutlu
+# tek bir "Sayısal Parmak İzi (Histogramı)" elde edilir.
+
+# 4. EĞİTİM (.train) VE EŞLEŞTİRME AŞAMASI:
+# face_recognizer.train(features, labels) komutu çalıştığında, yapay zeka 
+# hazırlanan bu parmak izlerini bir tabloya kaydeder ve yanına senin verdiğin 
+# label numarasını (ID) yazar. (Örn: "Bu parmak izi 2 numaralı kişiye ait").
+
+# 5. TAHMİN (PREDICTION) AŞAMASI:
+# Kameraya yeni bir yüz gösterildiğinde, algoritma anında o yüzün parmak izini çıkarır.
+# Hafızasındaki tabloya bakar ve matematiksel olarak yeni yüze en çok benzeyen 
+# (aradaki mesafesi en kısa olan) parmak izinin sahibini bulup numarasını döndürür.
+
+
+# ==========================================
+# BGR'DEN GRİ TONA GEÇİŞ (GRAYSCALE) MANTIĞI
+# ==========================================
+
+# 1. KANAL SAYISININ DÜŞMESİ
+# Renkli resimde her piksel [Mavi, Yeşil, Kırmızı] olarak 3 farklı değer (kanal) taşır.
+# cv.cvtColor(img, cv.COLOR_BGR2GRAY) işlemi bu 3 rengi siler ve yerine tek bir 
+# "Parlaklık / Işık Şiddeti" (0 ile 255 arası tek bir sayı) değeri koyar.
+
+# 2. RENKLER NASIL GRİ OLUR? (ÖNEMLİ KURAL)
+# "Renkli olan yerler beyaz olur" düşüncesi YANLIŞTIR. 
+# Bilgisayar renge değil, o rengin ne kadar parlak/ışıklı olduğuna bakar:
+# -> Koyu renkler (Örn: Lacivert, bordo) ışığı az olduğu için SİYAH (0'a yakın) olur.
+# -> Açık ve parlak renkler (Örn: Fosforlu sarı) ışığı çok olduğu için BEYAZ (255'e yakın) olur.
+
+# 3. İNSAN GÖZÜNE GÖRE HESAPLAMA (Formül)
+# OpenCV bu dönüşümü yaparken renkleri 3'e bölüp düz ortalama almaz. 
+# İnsan gözü en çok yeşile, en az maviye duyarlı olduğu için arka planda şu ağırlıklı matematiği yapar:
+# Yeni Gri Değer = (0.299 * Kırmızı) + (0.587 * Yeşil) + (0.114 * Mavi)
+
+# 4. MATRİS BOYUTU (Neden Griye Çeviriyoruz?)
+# Renkli Matris : (Yükseklik, Genişlik, 3) -> 3 katmanlıdır, bilgisayarı yorar.
+# Gri Matris    : (Yükseklik, Genişlik)    -> Tek katmanlıdır, düz bir haritadır.
+# Haar Cascade gibi algoritmalar, renk verisine ihtiyaç duymadığı için 
+# maksimum hız ve performans sağlamak adına bu tek katmanlı hafif matrisi ister.
