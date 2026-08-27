@@ -1,6 +1,4 @@
 #class attributes and class methods
-
-
 class Person:
     number_of_people = 0 
     gravity = -9.8
