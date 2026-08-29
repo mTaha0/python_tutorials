@@ -1,0 +1,15 @@
+# Sanal ortam klasörü (Bütün kütüphaneler buradadır, yüklenmemeli)
+.venv/
+
+# Python önbellek dosyaları
+__pycache__/
+*.pyc
+
+# VS Code kullanıcı ayarları
+.vscode/
+
+# Ağır medya ve video dosyaları
+*.avi
+*.mp4
+*.jpg
+*.png
