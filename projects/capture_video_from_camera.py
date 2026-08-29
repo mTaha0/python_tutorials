@@ -1,3 +1,26 @@
+"""
+Gerçek Zamanlı Nesne Tespiti ve Merkez İzleme (Real-time Object Detection and Centroid Tracking)
+
+Bu program, bilgisayar kamerasından alınan video akışı üzerinde HSV renk uzayını kullanarak 
+dinamik renk/nesne tespiti yapar. Tespit edilen nesnelerin sınırlarını (konturlarını) belirler 
+ve matematiksel kütle merkezlerini (centroid) hesaplayarak ekranda işaretler.
+
+Özellikler:
+    - Dinamik Kalibrasyon: Dahili 'Ayarlar' penceresindeki Trackbar'lar sayesinde, 
+      hedef nesnenin HSV renk sınırları (Hue, Saturation, Value) program çalışırken canlı olarak ayarlanabilir.
+    - Arka Plan İzolasyonu: Maskeleme işlemi kullanılarak hedef nesne haricindeki 
+      arka plan pikselleri izole edilir ve farklı bir renkle (kırmızı/pembe tonları) bastırılır.
+    - Geometrik Analiz: cv.moments() fonksiyonu ile gürültüden arındırılmış (alanı 25 pikselden büyük) 
+      şekillerin tam kütle merkezi hesaplanıp işaretlenir.
+    - Birleşik Görselleştirme (Grid Display): İşlenmiş renkli sonuç görüntüsü ile 
+      tespit edilen siyah-beyaz maske yan yana (np.hstack) tek bir pencerede birleştirilerek sunulur.
+
+Kullanım:
+    1. Programı çalıştırın.
+    2. 'Ayarlar' penceresindeki çubukları kaydırarak yakalamak istediğiniz nesnenin rengine göre sınırları belirleyin.
+    3. Çıkış yapmak için 'q' tuşuna basın.
+"""
+
 import cv2 as cv
 import numpy as np
 
